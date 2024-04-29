@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="Quarkus" url="file://$PROJECT_DIR$/project-fight-crud" />
+    <file type="Quarkus" url="file://$PROJECT_DIR$/project-heroes-crud" />
+    <file type="Quarkus" url="file://$PROJECT_DIR$/project-villain-crud" />
+    <file type="Quarkus" url="file://$PROJECT_DIR$/ui-super-heroes" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/project-fight-crud/pom.xml" />
+        <option value="$PROJECT_DIR$/project-heroes-crud/pom.xml" />
+        <option value="$PROJECT_DIR$/project-villain-crud/pom.xml" />
+        <option value="$PROJECT_DIR$/ui-super-heroes/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="corretto-11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
