@@ -1,74 +1,266 @@
-# project-fight-crud
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+# Exemplo de Microsserviços com Quarkus e Angular
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+Bem-vindo ao projeto!
+Este projeto é um exemplo de aplicação de microsserviços desenvolvido com Quarkus para o backend, Angular para o frontend e PostgreSQL como banco de dados. O objetivo deste projeto é demonstrar a arquitetura de microsserviços e a integração entre diferentes tecnologias para construir um sistema completo e funcional.
 
-## Running the application in dev mode
+## Stack utilizada
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
+**Back-end:** Quarkus, Framework Java para desenvolvimento de microsserviços eficientes e escaláveis. Além do PostgreSQL, Banco de dados relacional utilizado para armazenamento de dados.
+
+**Front-end:** Angular, Framework JavaScript para construção de interfaces de usuário modernas e responsivas.
+
+
+## Configuração
+
+1. Configuração do Backend
+- ms-heroes:
+    - verifique se o `application.properties` esteja configurado corretamente:
+  ```yml
+  quarkus.hibernate-orm.database.generation=drop-and-create
+  quarkus.http.port=8083
+  ```
+    - por fim, execute o comando:
+  ```yml
+  ./mvnw compile quarkus:dev
+  ```
+- ms-villain:
+    - verifique se o `application.properties` esteja configurado    corretamente:
+  ```yml
+  quarkus.hibernate-orm.database.generation=drop-and-create
+  quarkus.http.port=8084
+  ```
+    - por fim, execute o comando:
+  ```yml
+  ./mvnw compile quarkus:dev
+  ```
+- ms-fight:
+    - verifique se o `application.properties` esteja configurado    corretamente:
+  ```yml
+  quarkus.hibernate-orm.database.generation=drop-and-create
+  quarkus.http.port=8082
+  ```
+    - por fim, execute o comando:
+  ```yml
+  ./mvnw compile quarkus:dev
+  ```
+- ui-super-hero:
+    - verifique se o `application.properties` esteja configurado    corretamente:
+  ```yml
+  quarkus.hibernate-orm.database.generation=drop-and-create
+  quarkus.http.port=8080
+  ```
+    - por fim, execute o comando:
+  ```yml
+  ./mvnw compile quarkus:dev
+  ```
+## Documentação da API
+- Ms-Heroes
+
+### Recupera todas os herois disponíveis.
+
+```http
+  GET /api/heroes
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+### Recupera um heroi randomico.
 
-## Packaging and running the application
-
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+```http
+  GET /api/heroes/random
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+### Recupera um heroi específico com base no ID fornecido.
 
-## Creating a native executable
-
-You can create a native executable using: 
-```shell script
-./mvnw package -Dnative
+```http
+  GET /api/heroes/{id}
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `id` | `Long` | **Obrigatório**. O id do seu heroi  |
+
+### Cria um novo heroi. JSON exemplo:
+
+```http
+  POST /api/heroes
+```
+```JSON
+{
+  "level": 5,
+  "name": "Teste 123",
+  "powers":"Agility, Longevity"
+}
 ```
 
-You can then execute your native executable with: `./target/project-fight-crud-1.0.0-SNAPSHOT-runner`
+### Atualiza um heroi ja disponivel. JSON exemplo:
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+```http
+  PUT /api/heroes
+```
+```JSON
+{
+  "id": 4,
+  "level": 5,
+  "name": "Chewbacca StarWars",
+  "otherName": "",
+  "picture": "https://www.superherodb.com/pictures2/portraits/10/050/10466.jpg",
+  "powers": "Agility, Longevity, Marksmanship, Natural Weapons, Stealth, Super Strength, Weapons Master"
+}
+```
 
-## Related Guides
+### Deleta um heroi.
 
-- JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON Binding support
-- Hibernate Validator ([guide](https://quarkus.io/guides/validation)): Validate object properties (field, getter) and method parameters for your beans (REST, CDI, Jakarta Persistence)
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- RESTEasy Classic ([guide](https://quarkus.io/guides/resteasy)): REST endpoint framework implementing Jakarta REST and more
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
+```http
+  DELETE /api/heroes/{id}
+```
 
-## Provided Code
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `id` | `Long` | **Obrigatório**. O id do seu heroi  |
 
-### Hibernate ORM
+- Ms-Villain
 
-Create your first JPA entity
+### Recupera todas os vilão disponíveis.
 
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
+```http
+  GET /api/villains
+```
 
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
+### Recupera um vilão randomico.
 
+```http
+  GET /api/villains/random
+```
 
-### RESTEasy JAX-RS
+### Recupera um vilão específico com base no ID fornecido.
 
-Easily start your RESTful Web Services
+```http
+  GET /api/villains/{id}
+```
 
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `id` | `Long` | **Obrigatório**. O id do seu vilão  |
+
+### Cria um novo vilão. JSON exemplo:
+
+```http
+  POST /api/villains
+```
+```JSON
+{
+  "level": 5,
+  "name": "Teste 123",
+  "otherName": "",
+  "picture": "https://www.superherodb.com/pictures2/portraits/10/050/10466.jpg",
+  "powers": "Agility, Longevity, Marksmanship, Natural Weapons, Stealth, Super Strength, Weapons Master"
+}
+```
+
+### Atualiza um vilão ja disponivel. JSON exemplo:
+
+```http
+  PUT /api/villains
+```
+```JSON
+{
+  "id": 4,
+  "level": 5,
+  "name": "Villain 5 test",
+  "otherName": "",
+  "picture": "https://www.superherodb.com/pictures2/portraits/10/050/10466.jpg",
+  "powers": "Agility, Longevity, Marksmanship, Natural Weapons, Stealth, Super Strength, Weapons Master"
+}
+```
+
+### Deleta um vilão.
+
+```http
+  DELETE /api/villains/{id}
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `id` | `Long` | **Obrigatório**. O id do seu vilão  |
+
+- Ms-fight
+### Recupera todos as lutas disponíveis.
+
+```http
+  GET /api/fight
+```
+
+### Recupera um usuário específico com base no ID fornecido.
+
+```http
+  GET /api/fight/{id}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `Long` | **Obrigatório**. O ID da luta que você quer |
+
+### Recupera uma luta randomico.
+
+```http
+  GET /api/fight/random
+```
+
+### Cria um novo usuário. JSON exemplo:
+
+```http
+  POST /api/fight
+```
+```JSON
+{
+  "hero": {
+      "name": "Chewbacca",
+      "level": 5,
+      "picture": "https://www.superherodb.com/pictures2/portraits/10/050/10466.jpg",
+      "team": "heroes"
+  },
+  "villain": {
+      "name": "Buuccolo",
+      "level": 3,
+      "picture": "https://www.superherodb.com/pictures2/portraits/11/050/15355.jpg",
+      "team": "villains"
+  }
+}
+```
+
+### Documentação com Swagger
+A documentação completa da API pode ser encontrada no Swagger também. Para acessar a documentação, siga as etapas abaixo:
+
+1. Certifique-se de que o projeto esteja em execução.
+
+2. Abra um navegador da web e vá para a seguinte URL:
+   2.1 Para o ms-heroes: [Swagger API Heroes](http://localhost:8083/q/swagger-ui/#/)
+
+2.2 Para o ms-villains: [Swagger API Villain](http://localhost:8084/q/swagger-ui/#/)
+
+2.3 Para o ms-fight: [Swagger API Fights](http://localhost:8082/q/swagger-ui/#/)
+
+2.4 Para o ui-super-hero: [Swagger API Ui Super Hero](http://localhost:8080/q/swagger-ui/#/)
+
+3. Isso abrirá a interface do Swagger, onde você pode explorar e testar os endpoints da API, apenas se tiver autenticado.
+4. Use os exemplos com JSON com que já tem disponível aqui, ficará mais fácil para testar.
+
+Divirta-se explorando a API!
+
+## Sobre o projeto
+
+O projeto consiste em um pequeno CRUD de heróis e vilões, com um microsserviço dedicado para cada entidade. Além disso, há um microsserviço responsável por toda a lógica de "fights" entre heróis e vilões. Este microsserviço é responsável por receber as requisições do frontend, comunicar-se com os microsserviços de heróis e vilões, e retornar o resultado das batalhas.
+
+A interface com o usuário é construída com Angular e se comunica com o microsserviço de "fights" para obter os dados necessários para exibição e interação com o usuário. O microsserviço de "fights" é o ponto central da aplicação, garantindo que todas as interações entre heróis, vilões e o frontend sejam gerenciadas de forma eficiente e escalável.
+
+Este projeto é um exemplo simples, mas ilustra bem os conceitos de microsserviços e a integração entre diferentes tecnologias. Sinta-se à vontade para explorar e modificar o código-fonte de acordo com suas necessidades. Esperamos que este exemplo seja útil e inspire novos projetos baseados em microsserviços.
+
+### Diagrama do projeto
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+## Contribuindo
+
+Contribuições são sempre bem-vindas!
+
+Se você encontrar problemas ou tiver sugestões de melhorias, sinta-se à vontade para abrir um problema ou enviar uma solicitação pull.
