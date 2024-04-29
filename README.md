@@ -257,7 +257,7 @@ Este projeto √© um exemplo simples, mas ilustra bem os conceitos de microsservi√
 
 ### Diagrama do projeto
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/ThallysCezar/microsservices-Quarkus-Angular/blob/main/assets/DiagramaProjeto.jpeg)
 
 ## Contribuindo
 
